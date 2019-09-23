@@ -25,4 +25,8 @@ required DataBase:
  - Human Genome: hg38
  
 
-1、------ 原始序列质量控制，并去除宿主(人类)序列 ---------
+1、------ 原始序列质量控制，并去除宿主(人类)序列 --------- \
+```
+./preprocess.sh accs_id.txt 
+```
+accs_id.txt : 存放NCBI run_id 的txt文件
