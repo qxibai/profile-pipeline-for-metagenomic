@@ -20,19 +20,22 @@ mkdir 05_geneprofile # normalized后结果 \
 - BWA
 - Samtools
 - metaphlan2 
+- humann2
 
 #### required DataBase:
  - Human Genome: hg38
  
 
-1、------ 原始序列质量控制，并去除宿主(人类)序列 --------- \
+1、------ 原始序列质量控制，并去除宿主(人类)序列 ------
 ```
 ./preprocess.sh accs_id.txt 
 ```
 accs_id.txt : 存放NCBI run_id 的txt文件
 
-2. ------ generate species profile ------------- \
+2. ------ generate species profile ------------- 
 ```
 ./SpeciesProfile.sh accs_id.txt
 ```
+
+3. ----- generate functional profile ----------
 
