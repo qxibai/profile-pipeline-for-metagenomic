@@ -26,7 +26,8 @@ mkdir 05_geneprofile # normalized后结果 \
 #### required DataBase:
  - Human Genome database: /home1/Laisenying/Tools/data/human/hg38
  - ICG gene catalog: /home1/Laisenying/.local/share/ngless/data/Modules/igc.ngm/0.9/igc.fna
- - 
+ - chorophlan database: /share/home1/Laisenying/Tools/data/humann2/chocophlan
+ - uniref database: /share/home1/Laisenying/Tools/data/humann2/uniref
  
 
 1、------ 原始序列质量控制，并去除宿主(人类)序列 ------
@@ -41,4 +42,9 @@ accs_id.txt : 存放NCBI run_id 的txt文件
 ```
 
 3. ----- generate functional profile ----------
+```
+./FunctionalProfile.sh accs_id.txt
+```
+
+4. ----- generate Gene/eggNOG/KO profile ------
 
