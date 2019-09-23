@@ -23,7 +23,9 @@ mkdir 05_geneprofile # normalized后结果 \
 - humann2
 
 #### required DataBase:
- - Human Genome: hg38
+ - Human Genome database: /home1/Laisenying/Tools/data/human/hg38
+ - ICG gene catalog: /home1/Laisenying/.local/share/ngless/data/Modules/igc.ngm/0.9/igc.fna
+ - 
  
 
 1、------ 原始序列质量控制，并去除宿主(人类)序列 ------
