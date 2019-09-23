@@ -47,4 +47,6 @@ accs_id.txt : 存放NCBI run_id 的txt文件
 ```
 
 4. ----- generate Gene/eggNOG/KO profile ------
-
+```
+./GeneProfile.sh accs_id.txt
+```
