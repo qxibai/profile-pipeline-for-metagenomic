@@ -30,3 +30,9 @@ mkdir 05_geneprofile # normalized后结果 \
 ./preprocess.sh accs_id.txt 
 ```
 accs_id.txt : 存放NCBI run_id 的txt文件
+
+2. ------ generate species profile ------------- \
+```
+./SpeciesProfile.sh accs_id.txt
+```
+
