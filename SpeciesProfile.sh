@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #$1: path to accs_id.txt
-path_to_metaphlan2 = "/share/home1/Laisenying/miniconda3/envs/metaphlan2/"
-BasePath = '/home1/Laisenying/Data-analysis/CRC'
+path_to_metaphlan2="/share/home1/Laisenying/miniconda3/envs/metaphlan2/"
+BasePath='/home1/Laisenying/Data-analysis/CRC'
 
 source activate metaphlan2
 cd $path_to_metaphlan2
