@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #$1: path to accs_id.txt
-path_to_metaphlan2 = "/share/home1/Laisenying/miniconda3/envs/metaphlan2/"
-BasePath = '/home1/Laisenying/Data-analysis/CRC'
-chocophlan_database = '/share/home1/Laisenying/Tools/data/humann2/chocophlan'
-uniref_database = '/share/home1/Laisenying/Tools/data/humann2/uniref'
-HuMann2 = '/home1/Laisenying/miniconda3/bin/humann2'
+path_to_metaphlan2="/share/home1/Laisenying/miniconda3/envs/metaphlan2/"
+BasePath='/home1/Laisenying/Data-analysis/CRC'
+chocophlan_database='/share/home1/Laisenying/Tools/data/humann2/chocophlan'
+uniref_database='/share/home1/Laisenying/Tools/data/humann2/uniref'
+HuMann2='/home1/Laisenying/miniconda3/bin/humann2'
 
 export PATH=/share/home1/Laisenying/Tools:$PATH
 for infile in `cat $1`
