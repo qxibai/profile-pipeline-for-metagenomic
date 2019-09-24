@@ -1,5 +1,3 @@
-#！/bin/bash
-
 #!/bin/bash
 
 # $1: path to accs_id.txt
