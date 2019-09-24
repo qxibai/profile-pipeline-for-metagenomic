@@ -5,7 +5,6 @@ import argparse
 import os
 from argparse import RawTextHelpFormatter
 
-
 # Command Line Argument Parsing
 def parser():
   parser = argparse.ArgumentParser(description='Gene Count pipeline.', formatter_class=RawTextHelpFormatter)
@@ -71,7 +70,10 @@ def filter_reads(dataSAM, count_type='union', min_length=50):
         """
         dataSAM_fil = dataSAM[abs(dataSAM['mapped_length']) >= min_length]
         return dataSAM_fil
-
+        
+    if count_type == 'single':
+      dataSAM_fil = dataSAM_fil[dataSAM_fil['mlen'] >= min_length]
+      
 
 # count the number of reads mapped to the gene
 def gene_counts():
@@ -90,3 +92,4 @@ def gene_counts():
 if __name__ == '__main__':
     args = parser().parse_args()
     gene_counts()
+
