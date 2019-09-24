@@ -3,10 +3,10 @@
 #!/bin/bash
 
 # $1: path to accs_id.txt
-TRIMMO_JAR_FILE = '/home1/Laisenying/Tools/Trimmomatic-0.39/trimmomatic-0.39.jar'
-TRIMMO_ADAPTOR_FILE_PE = '/home1/Laisenying/Tools/Trimmomatic-0.39/adapters/TruSeq3-PE.fa'
-Bowtie2 = '/home1/Laisenying/miniconda3/bin/bowtie2'
-BasePath = '/home1/Laisenying/Data-analysis/CRC'
+TRIMMO_JAR_FILE='/home1/Laisenying/Tools/Trimmomatic-0.39/trimmomatic-0.39.jar'
+TRIMMO_ADAPTOR_FILE_PE='/home1/Laisenying/Tools/Trimmomatic-0.39/adapters/TruSeq3-PE.fa'
+Bowtie2='/home1/Laisenying/miniconda3/bin/bowtie2'
+BasePath='/home1/Laisenying/Data-analysis/CRC'
 
 for infile in `cat $1`
 do
