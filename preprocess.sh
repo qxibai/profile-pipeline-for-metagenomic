@@ -12,7 +12,7 @@ do
 /usr/bin/java -jar $TRIMMO_JAR_FILE PE \
     -threads 8 \
     $BasePath/00_rawdata/${infile}/${infile}_1.fastq.gz  \
-    $BasePath/CRC/00_rawdata/${infile}/${infile}_2.fastq.gz  \
+    $BasePath/00_rawdata/${infile}/${infile}_2.fastq.gz  \
     $BasePath/01_trim/${infile}_clean.1.fq.gz \
     $BasePath/01_trim/${infile}_clean_unpaired.1.fq.gz \
     $BasePath/01_trim/${infile}_clean.2.fq.gz \
