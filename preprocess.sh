@@ -40,7 +40,7 @@ rm -rf $BasePath/02_rmhuman/${infile}_hg38_paired_contam1.fq.gz
 rm -rf $BasePath/02_rmhuman/${infile}_hg38_paired_contam2.fq.gz 
 
 elif
-[ -s "$BasePath/00_rawdata/${infile}/${infile}.fastq.gz" ] && [! -f "$BasePath/00_rawdata/${infile}/${infile}_1.fastq.gz" ];
+[ -s "$BasePath/00_rawdata/${infile}/${infile}.fastq.gz" ] && [ ! -f "$BasePath/00_rawdata/${infile}/${infile}_1.fastq.gz" ];
 then
 
 /usr/bin/java -jar $TRIMMO_JAR_FILE SE \
