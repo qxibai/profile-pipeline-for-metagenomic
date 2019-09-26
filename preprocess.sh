@@ -5,7 +5,7 @@ TRIMMO_JAR_FILE='/home1/Laisenying/Tools/Trimmomatic-0.39/trimmomatic-0.39.jar'
 TRIMMO_ADAPTOR_FILE_PE='/home1/Laisenying/Tools/Trimmomatic-0.39/adapters/TruSeq3-PE.fa'
 Bowtie2='/home1/Laisenying/miniconda3/bin/bowtie2'
 BasePath='/home1/Laisenying/Data-analysis/CRC'
-Human_database='/home1/Laisenying/Tools/data/human/hg3'
+Human_database='/home1/Laisenying/Tools/data/human/hg38'
 
 for infile in `cat $1`
 do
@@ -70,7 +70,7 @@ then
 rm -rf $BasePath/01_trim/${infile}_clean.fq.gz
 rm -rf $BasePath/00_rawdata/${infile}/${infile}.fastq.gz
 elif
-[-s "$BasePath/02_rmhuman/${infile}_hg38_paired_clean1.fq.gz"] && [-s "$BasePath/02_rmhuman/${infile}_hg38_paired_clean2.fq.gz"];
+[ -s "$BasePath/02_rmhuman/${infile}_hg38_paired_clean1.fq.gz" ] && [ -s "$BasePath/02_rmhuman/${infile}_hg38_paired_clean2.fq.gz" ];
 then
 rm -rf $BasePath/01_trim/${infile}_clean.1.fq.gz
 rm -rf $BasePath/01_trim/${infile}_clean.2.fq.gz
