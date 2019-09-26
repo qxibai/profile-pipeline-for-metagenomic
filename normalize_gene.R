@@ -29,8 +29,8 @@ if(TRUE){
   )
   opts <- parse_args(OptionParser(option_list=option_list))
   # 显示输入输出确认是否正确
-  print(paste("The input file is ",opts$input,sep=""))
-  print(paste("The output file prefix is",opts$output, sep = ""))
+  print(paste("The input file is ",opts$input,sep=" "))
+  print(paste("The output file prefix is",opts$output, sep = " "))
 }
 
 
@@ -52,19 +52,19 @@ rownames(IGC_metadata) = IGC_metadata$GeneName
 rownames(gene_Merge) <- gene_Merge$gene
 gene_Merge_normal <- gene_Merge[2:ncol(gene_Merge)]/(IGC_metadata[gene_Merge$gene,'GeneLength']/1000)
 # save normalized gene profile data
-save(gene_Merge_normal,paste(opts$output,'/gene_profile_normalized.Rdata',sep=''))
+save(gene_Merge_normal,file=paste(opts$output,'/gene_profile_normalized.Rdata',sep=''))
 
 # KEGG annotation
 gene_Merge_normal$KEGG <- IGC_metadata[gene_Merge$gene,'KEGGs']
 KEGG_abundance <- apply(gene_Merge_normal[,-which(colnames(gene_Merge_normal) %in% c('KEGG'))],2,function(x){
   tapply(x, gene_Merge_normal[,"KEGG"],sum,na.rm=TRUE)
 })
-save(KEGG_abundance,paste(opts$output,'/KEGG_profile.Rdata',sep=''))
+save(KEGG_abundance,file=paste(opts$output,'/KEGG_profile.Rdata',sep=''))
 
 # eggNOE annotation
 gene_Merge_normal$eggNOG <- IGC_metadata[gene_Merge$gene,'eggNOGs']
 eggNOG_abundance <- apply(gene_Merge_normal[,-which(colnames(gene_Merge_normal) %in% c('KEGG','eggNOG'))],2,function(x){
   tapply(x, gene_Merge_normal[,"eggNOG"],sum,na.rm=TRUE)
 })
-save(eggNOG_abundance,paste(opts$output,'/eggNOG_profile.Rdata',sep=''))
+save(eggNOG_abundance,file=paste(opts$output,'/eggNOG_profile.Rdata',sep=''))
 
