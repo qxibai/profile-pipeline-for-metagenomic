@@ -3,7 +3,7 @@
 ##### 序列质控
 mkdir 00_rawdata    #原始序列文件
 mkdir 01_trim       #储存序列质控后的原始序列文件 \
-mkdir 02_rmhuman    #比对到人类基因组上去除人类序列 \
+mkdir 02_rmhuman    #比对到人类基因组上去除人类序列 
 ##### species profile
 mkdir 03_metaphlan2 #metaphlan2物种丰度注释文件 \
 mkdir 03_bowtie2    #metaphlan2的中间输出文件 \
