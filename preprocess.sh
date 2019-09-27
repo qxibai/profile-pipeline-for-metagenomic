@@ -6,6 +6,9 @@ TRIMMO_ADAPTOR_FILE_PE='/home1/Laisenying/Tools/Trimmomatic-0.39/adapters/TruSeq
 Bowtie2='/home1/Laisenying/miniconda3/bin/bowtie2'
 BasePath='/home1/Laisenying/Data-analysis/CRC'
 Human_database='/home1/Laisenying/Tools/data/human/hg38'
+TRIMMO_ADAPTOR_FILE_SE='/home1/Laisenying/Tools/Trimmomatic-0.39/adapters/TruSeq3-SE.fa'
+
+export PATH=/usr/bin:$PATH
 
 for infile in `cat $1`
 do
@@ -14,7 +17,7 @@ if
 [ -s "$BasePath/00_rawdata/${infile}/${infile}_1.fastq.gz" ] && [ -s "$BasePath/00_rawdata/${infile}/${infile}_2.fastq.gz" ];
 then
 
-/usr/bin/java -jar $TRIMMO_JAR_FILE PE \
+java -jar $TRIMMO_JAR_FILE PE \
     -threads 8 \
     $BasePath/00_rawdata/${infile}/${infile}_1.fastq.gz  \
     $BasePath/00_rawdata/${infile}/${infile}_2.fastq.gz  \
@@ -43,12 +46,12 @@ elif
 [ -s "$BasePath/00_rawdata/${infile}/${infile}.fastq.gz" ] && [ ! -f "$BasePath/00_rawdata/${infile}/${infile}_1.fastq.gz" ];
 then
 
-/usr/bin/java -jar $TRIMMO_JAR_FILE SE \
+java -jar $TRIMMO_JAR_FILE SE \
     -threads 8 \
     $BasePath/00_rawdata/${infile}/${infile}.fastq.gz  \
     $BasePath/01_trim/${infile}_clean.fq.gz \
     $BasePath/01_trim/${infile}_clean_unpaired.fq.gz \
-    ILLUMINACLIP:$TRIMMO_ADAPTOR_FILE_PE:2:15:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:15:30 MINLEN:50
+    ILLUMINACLIP:$TRIMMO_ADAPTOR_FILE_SE:2:15:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:15:30 MINLEN:50
 
 rm -rf $BasePath/01_trim/${infile}_clean_unpaired.fq.gz
 
@@ -79,5 +82,10 @@ rm -rf $BasePath/00_rawdata/${infile}/${infile}_2.fastq.gz
 fi
 
 done
+
+
+
+
+
 
 
