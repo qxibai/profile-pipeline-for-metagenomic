@@ -50,10 +50,8 @@ java -jar $TRIMMO_JAR_FILE SE \
     -threads 8 \
     $BasePath/00_rawdata/${infile}/${infile}.fastq.gz  \
     $BasePath/01_trim/${infile}_clean.fq.gz \
-    $BasePath/01_trim/${infile}_clean_unpaired.fq.gz \
     ILLUMINACLIP:$TRIMMO_ADAPTOR_FILE_SE:2:15:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:15:30 MINLEN:50
 
-rm -rf $BasePath/01_trim/${infile}_clean_unpaired.fq.gz
 
 # 去宿主序列
 $Bowtie2 -x $Human_database  \
