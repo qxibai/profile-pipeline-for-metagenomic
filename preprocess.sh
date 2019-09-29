@@ -14,7 +14,7 @@ for infile in `cat $1`
 do
 
 if
-[ -s "$BasePath/00_rawdata/${infile}/${infile}_1.fastq.gz" ] && [ -s "$BasePath/00_rawdata/${infile}/${infile}_2.fastq.gz" ];
+[ -s "$BasePath/00_rawdata/${infile}/${infile}_1.fastq.gz" ] && [ -s "$BasePath/00_rawdata/${infile}/${infile}_2.fastq.gz" ] && [ ! -f "$BasePath/02_rmhumn/${infile}_hg38_paired_clean2.fq.gz" ];
 then
 
 java -jar $TRIMMO_JAR_FILE PE \
@@ -43,7 +43,7 @@ rm -rf $BasePath/02_rmhuman/${infile}_hg38_paired_contam1.fq.gz
 rm -rf $BasePath/02_rmhuman/${infile}_hg38_paired_contam2.fq.gz 
 
 elif
-[ -s "$BasePath/00_rawdata/${infile}/${infile}.fastq.gz" ] && [ ! -f "$BasePath/00_rawdata/${infile}/${infile}_1.fastq.gz" ];
+[ -s "$BasePath/00_rawdata/${infile}/${infile}.fastq.gz" ] && [ ! -f "$BasePath/00_rawdata/${infile}/${infile}_1.fastq.gz" ] && [ ! -f "$BasePath/02_rmhumn/${infile}_hg38_paired_clean.fq.gz" ];
 then
 
 java -jar $TRIMMO_JAR_FILE SE \
@@ -80,9 +80,6 @@ rm -rf $BasePath/00_rawdata/${infile}/${infile}_2.fastq.gz
 fi
 
 done
-
-
-
 
 
 
