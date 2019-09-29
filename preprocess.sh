@@ -58,8 +58,8 @@ $Bowtie2 -x $Human_database  \
     -p 8 \
     --very-sensitive \
     -U $BasePath/01_trim/${infile}_clean.fq.gz \
-    --un-conc-gz $BasePath/02_rmhuman/${infile}_hg38_paired_clean.fq.gz \
-    --al-conc-gz $BasePath/02_rmhuman/${infile}_hg38_paired_contam.fq.gz 
+    --un-gz $BasePath/02_rmhuman/${infile}_hg38_paired_clean.fq.gz \
+    --al-gz $BasePath/02_rmhuman/${infile}_hg38_paired_contam.fq.gz 
     
 rm -rf $BasePath/02_rmhuman/${infile}_hg38_paired_contam.fq.gz 
 fi
@@ -80,6 +80,8 @@ rm -rf $BasePath/00_rawdata/${infile}/${infile}_2.fastq.gz
 fi
 
 done
+
+
 
 
 
