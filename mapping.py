@@ -42,11 +42,11 @@ def parser():
 def BWA_mapping(provideDB_path, bwa_path, samtools_path, bedtools_path, DNA_first, DNA_second, output_path, fileName):
     # BWA-MEM
     if DNA_second == "false":  # single end
-        os.system(bwa_path + "/bwa mem -t 8 " + provideDB_path + " " + DNA_first + " > " + output_path+"/"+fileName+".sam")
+        os.system(bwa_path + "/bwa mem -t 15 " + provideDB_path + " " + DNA_first + " > " + output_path+"/"+fileName+".sam")
     else: # pair end
-        os.system(bwa_path + "/bwa mem -t 8 " + provideDB_path + " " + DNA_first + " "+ DNA_second + " > " + output_path+"/"+fileName+".sam")
+        os.system(bwa_path + "/bwa mem -t 15 " + provideDB_path + " " + DNA_first + " "+ DNA_second + " > " + output_path+"/"+fileName+".sam")
     # samtools
-    os.system(samtools_path+"/samtools view -bS " + output_path + "/" + fileName + ".sam > " + output_path + "/" + fileName + ".bam")
+    os.system(samtools_path+"/samtools view -bS -q 10 " + output_path + "/" + fileName + ".sam > " + output_path + "/" + fileName + ".bam")
     os.system(samtools_path+"/samtools sort " + output_path + "/" + fileName + ".bam > " + output_path + "/" + fileName + ".bam.sort")
     if os.path.exists(provideDB_path + ".bed") is False:
         os.system("awk '/^>/ {if (seqlen){print \"0\t\"seqlen-1}; gsub(/^>/,\"\",$1);printf(\"%s\t\",$1) ;seqlen=0;next; } { seqlen += length($0)}END{print \"0\t\"seqlen-1}' " + provideDB_path + " > " + provideDB_path + ".bed")
