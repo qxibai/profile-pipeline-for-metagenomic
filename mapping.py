@@ -9,7 +9,6 @@ from argparse import RawTextHelpFormatter
 # 1. data_path: ./02_rmhuman
 # 2. IGC_reference_database: /home1/Laisenying/.local/share/ngless/data/Modules/igc.ngm/0.9/igc.fna
 # 3. output_path_intermediate: /home1/Laisenying/Data-analysis/CRC/03_SAM
-# 6. Bowtie2_path: /home1/Laisenying/miniconda3/bin
 # 7. sample_list: accs_id.txt
 # 8. samtools_path: /home1/Laisenying/Tools/samtools/samtools-1.9
 # 9. bedtools_path: /home1/Laisenying/Tools/bedtools2-2.25.0/bin
@@ -17,7 +16,7 @@ from argparse import RawTextHelpFormatter
 
 
 def parser():
-  parser = argparse.ArgumentParser(description='generation gene counts matrix', formatter_class=RawTextHelpFormatter)
+  parser = argparse.ArgumentParser(description='mapping gene to IGC database and count genes', formatter_class=RawTextHelpFormatter)
   required = parser.add_argument_group('Required arguments')
   required.add_argument('-s', action='store', type=str, dest="data_path",
                         help='Path to fastq file for mapping', required=True)
@@ -25,9 +24,6 @@ def parser():
                         help='path to IGC reference database', required=True)
   required.add_argument('-o', action='store', type=str, dest="output_path_intermediate",
                         help='output directory for sam files, bam files and mapping coverage',
-                        required=True)
-  required.add_argument('-Bowtie', action='store', type=str, dest="Bowtie2_path",
-                        help='path to Bowtie2',
                         required=True)
   required.add_argument('-BWA', action='store', type=str, dest="bwa_path",
                         help='path to BWA',required=True)                      
@@ -97,7 +93,6 @@ if __name__ == '__main__':
 
     DNA_first = ""
     DNA_second = ""
-    missing_file = []
     processes = []
     for fileName in fileNames:
         # paired reads
@@ -109,7 +104,6 @@ if __name__ == '__main__':
             DNA_second = "false"
         else:
             print("ERROR - the dataset: " + fileName + " missing metagenome files")
-            missing_file.append(fileName)
             continue
 
         # create output file
