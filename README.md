@@ -19,6 +19,7 @@ mkdir 05_geneprofile # normalized后结果
 - Bowtie2
 - Trimmomatic
 - BWA
+- bedtools
 - Samtools
 - metaphlan2 
 - humann2
@@ -48,6 +49,14 @@ accs_id.txt : 存放NCBI run_id 的txt文件
 
 4. ----- generate Gene/eggNOG/KO profile ------
 ```
-./GeneProfile.sh accs_id.txt
-Rscript normalize_gene.R -i accs_id.txt -o /path/to/outfolder
+python /home1/Laisenying/Tools/gene_annotation/bowtie2_mapping.py \
+  -s /home1/Laisenying/Data-analysis/CRC/02_rmhuman \
+  -ref /home1/Laisenying/.local/share/ngless/data/Modules/igc.ngm/0.9/igc.fna \
+  -o /home1/Laisenying/Data-analysis/CRC/03_SAM \
+  -Bowtie /home1/Laisenying/miniconda3/bin \
+  -BWA /home1/Laisenying/Tools/bwa \
+  -sam /home1/Laisenying/Tools/samtools/samtools-1.9 \
+  -bed /home1/Laisenying/Tools/bedtools2-2.25.0/bin \
+  -list /home1/Laisenying/Data-analysis/CRC/accs_id2.txt
 ```
+
