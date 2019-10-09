@@ -57,5 +57,10 @@ python bowtie2_mapping.py \
   -sam /home1/Laisenying/Tools/samtools/samtools-1.9 \
   -bed /home1/Laisenying/Tools/bedtools2-2.25.0/bin \
   -list /home1/Laisenying/Data-analysis/CRC/accs_id2.txt
+  
+# 合并结果文件
+python /home1/Laisenying/Tools/gene_annotation/generate_matrix.py \
+  -i /home1/Laisenying/Data-analysis/CRC/03_SAM \
+  -o /home1/Laisenying/Data-analysis/CRC/04_genecount 
 ```
 
