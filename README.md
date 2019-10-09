@@ -47,7 +47,7 @@ accs_id.txt : 存放NCBI run_id 的txt文件
 ./FunctionalProfile.sh accs_id.txt
 ```
 
-4. ----- generate Gene/eggNOG/KO profile ------
+4. ----- generate Gene profile ------
 ```
 python /home1/Laisenying/Tools/gene_annotation/bowtie2_mapping.py \
   -s /home1/Laisenying/Data-analysis/CRC/02_rmhuman \
