@@ -52,13 +52,14 @@ if __name__ == '__main__':
   dictionary = {}
   count = 0  
   while count < len(IGC_reference):
-    if IGC_reference[count][0] == '>':
-      gene_name = IGC_reference[count].split()[0][1:]
-      dictionary[gene_name] = len(IGC_reference[count + 1]) - 1
-      temp_count = count + 2
-      while temp_count < len(IGC_reference) and IGC_reference[temp_count][0] != '>':
-        dictionary[gene_name] = dictionary[gene_name] + len(IGC_reference[temp_count]) - 1
-        temp_count = temp_count + 1
+    if IGC_reference[count][0] == '>': # it is the header of the sequence
+        gene_name = IGC_reference[count].split()[0][1:]
+        dictionary[gene_name] = len(IGC_reference[count + 1]) - 1
+        temp_count = count + 2
+        while temp_count < len(IGC_reference) and IGC_reference[temp_count][0] != '>':
+            dictionary[gene_name] = dictionary[gene_name] + len(IGC_reference[temp_count]) - 1
+            temp_count = temp_count + 1
+    
     count = count + 1
     
     
@@ -79,13 +80,14 @@ if __name__ == '__main__':
   # start calculating TPM
   row = 1
   column = 1
-  # step 1: divide read counts by gene length in kilobase
+  # step 1 divide read counts by gene length in kilobase
   while row < len(DNA_matrix_data):
+    column=1
     while column < len(DNA_matrix_data[0]):
-      gene_name = DNA_matrix_data[row][0]
-      gene_length = dictionary[gene_name]
-      DNA_matrix_data[row][column] = str(float( DNA_matrix_data[row][column] ) /  ( float(gene_length) / 1000))
-      column = column + 1
+        gene_name = DNA_matrix_data[row][0]
+        gene_length = dictionary[gene_name]
+        DNA_matrix_data[row][column] = str( float( DNA_matrix_data[row][column] ) /  ( float(gene_length) / 1000) )
+        column = column + 1
     row = row + 1
       
   # step 2: Count up all the RPK values in a sample and divide this number by 1,000,000
@@ -94,10 +96,12 @@ if __name__ == '__main__':
   row = 1
   column = 1
   while column < len(DNA_matrix_data[0]):
+    row = 1
     total=0.0
     while row < len(DNA_matrix_data):
       total = total + float(DNA_matrix_data[row][column])
       row = row + 1
+      
     scaling_factor.append(total/1000000)
     column = column + 1
     
@@ -105,8 +109,12 @@ if __name__ == '__main__':
   row = 1
   column = 1
   while column < len(DNA_matrix_data[0]):
+    row = 1
     while row < len(DNA_matrix_data):
-      DNA_matrix_data[row][column] = str( float( DNA_matrix_data[row][column] ) / scaling_factor[column] )
+      if(scaling_factor[column] == 0):
+        DNA_matrix_data[row][column] = "0"
+      else:
+        DNA_matrix_data[row][column] = str( float( DNA_matrix_data[row][column] ) / scaling_factor[column] )
       row = row + 1
     column = column + 1
         
@@ -118,7 +126,8 @@ if __name__ == '__main__':
   DNA_matrix_length_after_filter = 0
   while count < len(DNA_matrix_data_original):
     if keep_this_line(DNA_matrix_data[count][1:]) == True:
-        DNA_matrix_outFile.write(DNA_matrix_data_original[count])
+        DNA_matrix_data[count].append('\n')
+        DNA_matrix_outFile.write("\t".join(DNA_matrix_data[count]))
         DNA_matrix_length_after_filter = DNA_matrix_length_after_filter + 1
     count = count + 1
     
@@ -130,7 +139,6 @@ if __name__ == '__main__':
   outFile_summary.write("DNA TPM filtering:\n")
   rate = float((DNA_matrix_length_before_filter - DNA_matrix_length_after_filter) / float(DNA_matrix_length_before_filter)) * 100
   outFile_summary.write("Total: " + str(DNA_matrix_length_before_filter) + " genes\tRemoval: " + str(DNA_matrix_length_before_filter - DNA_matrix_length_after_filter) + " genes\tRemaining: " + str(DNA_matrix_length_after_filter) + " genes\tFilter_rate: " + str(rate) + "\n\n")
-  
-    
+
     
    
