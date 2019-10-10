@@ -62,5 +62,13 @@ python bowtie2_mapping.py \
 python /home1/Laisenying/Tools/gene_annotation/generate_matrix.py \
   -i /home1/Laisenying/Data-analysis/CRC/03_SAM \
   -o /home1/Laisenying/Data-analysis/CRC/04_genecount 
+  
+# TPM normalization and filtered
+python /home1/Laisenying/Tools/gene_annotation/normalization.py \
+  -i /home1/Laisenying/Data-analysis/CRC/04_genecount/DNA_hGEM.txt \
+  -minTPM 1.0 \
+  -minSam 1 \
+  -ref /home1/Laisenying/.local/share/ngless/data/Modules/igc.ngm/0.9/igc.fna \
+  -o /home1/Laisenying/Data-analysis/CRC/05_geneprofil
 ```
 
