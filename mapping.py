@@ -42,9 +42,9 @@ def parser():
 def BWA_mapping(provideDB_path, bwa_path, samtools_path, bedtools_path, DNA_first, DNA_second, output_path, fileName):
     # BWA-MEM
     if DNA_second == "false":  # single end
-        os.system(bwa_path + "/bwa mem -t 15 " + provideDB_path + " " + DNA_first + " > " + output_path+"/"+fileName+".sam")
+        os.system(bwa_path + "/bwa mem -t 4 " + provideDB_path + " " + DNA_first + " > " + output_path+"/"+fileName+".sam")
     else: # pair end
-        os.system(bwa_path + "/bwa mem -t 15 " + provideDB_path + " " + DNA_first + " "+ DNA_second + " > " + output_path+"/"+fileName+".sam")
+        os.system(bwa_path + "/bwa mem -t 4 " + provideDB_path + " " + DNA_first + " "+ DNA_second + " > " + output_path+"/"+fileName+".sam")
     # samtools
     os.system(samtools_path+"/samtools view -bS -q 10 " + output_path + "/" + fileName + ".sam > " + output_path + "/" + fileName + ".bam")
     os.system(samtools_path+"/samtools sort " + output_path + "/" + fileName + ".bam > " + output_path + "/" + fileName + ".bam.sort")
@@ -58,6 +58,7 @@ def BWA_mapping(provideDB_path, bwa_path, samtools_path, bedtools_path, DNA_firs
     os.system("rm -rf " + output_path + "/" + fileName + ".sam")    
     os.system("rm -rf " + output_path + "/" + fileName + ".bam")  
     os.system("rm -rf " + output_path + "/" + fileName + ".coverage")  
+    os.system("rm -rf " + output_path + "/" + fileName + ".bam.sort")  
 
 
 if __name__ == '__main__':
@@ -94,6 +95,7 @@ if __name__ == '__main__':
     DNA_first = ""
     DNA_second = ""
     processes = []
+    pool = multiprocessing.Pool(processes=4)
     for fileName in fileNames:
         # paired reads
         if os.path.exists(args.data_path+"/"+fileName+"_hg38_paired_clean1.fq.gz") is True and os.path.exists(args.data_path+"/"+fileName+"_hg38_paired_clean2.fq.gz") is True:
@@ -112,11 +114,17 @@ if __name__ == '__main__':
 
         print("Processing " + fileName)
         output_path = args.output_path_intermediate+"/"+fileName
-        t = multiprocessing.Process(target=BWA_mapping, args=(args.IGC_reference_database, args.bwa_path,
-                                                          args.samtools_path, args.bedtools_path, DNA_first, DNA_second,
-                                                          output_path, fileName, ))
-        processes.append(t)
-        t.start()
+        #t = multiprocessing.Process(target=BWA_mapping, args=(args.IGC_reference_database, args.bwa_path,
+        #                                                  args.samtools_path, args.bedtools_path, DNA_first, DNA_second,
+        #                                                  output_path, fileName, ))
+        t = pool.apply_async(func=BWA_mapping, args=(args.IGC_reference_database, args.bwa_path,
+                                                         args.samtools_path, args.bedtools_path, DNA_first, DNA_second,
+                                                        output_path, fileName, ))
+        #processes.append(t)
+        #t.start()
 
-    for one_process in processes:
-        one_process.join()
+    #for one_process in processes:
+        #one_process.join()
+    pool.close()
+    pool.join()
+
